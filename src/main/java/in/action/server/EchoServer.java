@@ -27,7 +27,7 @@ public class EchoServer {
         }*/
         //设置端口的值
         //int port = Integer.parseInt(args[0]);
-        int port=7001;
+        int port = 7001;
         new EchoServer(port).start();
     }
 
