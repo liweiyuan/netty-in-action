@@ -10,7 +10,7 @@ import java.net.Socket;
  * Created by spark on 17-4-30.
  */
 public class TimeClient {
-    public static void main(String[] args) {
+    public static void nettyClient() {
         Socket socket = null;
         BufferedReader in = null;
         PrintWriter out = null;
@@ -45,6 +45,26 @@ public class TimeClient {
                 }
             }
             socket=null;
+        }
+    }
+
+    public static void main(String[] args) {
+
+        while(true){
+            try {
+                Thread.sleep(1000*60);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            new Thread(new Runnable() {
+                public void run() {
+                    //多线程并发连接服务端
+                    System.out.println("准备连接");
+                    nettyClient();
+                    //连接成功
+                    System.err.println("succcess");
+                }
+            });
         }
     }
 }

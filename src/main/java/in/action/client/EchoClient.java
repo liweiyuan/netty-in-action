@@ -56,8 +56,27 @@ public class EchoClient {
 
         //String host = args[0];
         //int port = Integer.parseInt(args[1]);
-        String host = "localhost";
-        int port = 7001;
-        new EchoClient(host, port).start();
+
+
+        while (true) {
+            Thread.sleep(1000 * 40);
+            new Thread(new Runnable() {
+                public void run() {
+                    //多线程并发连接服务端
+                    System.out.println("准备连接");
+
+                    String host = "localhost";
+                    int port = 7001;
+                    try {
+                        new EchoClient(host, port).start();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //连接成功
+                    System.err.println("succcess");
+                }
+            }).start();
+        }
     }
+
 }
