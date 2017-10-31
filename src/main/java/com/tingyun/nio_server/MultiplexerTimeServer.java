@@ -84,7 +84,18 @@ public class MultiplexerTimeServer implements Runnable {
                 SocketChannel sc = ssc.accept();
                 sc.configureBlocking(false);
                 //Add the new connection to the selector
-                sc.register(selector, SelectionKey.OP_READ);
+                SelectionKey selection=sc.register(selector, SelectionKey.OP_READ);
+                System.err.println(selection);
+                boolean accept=selection.isAcceptable();
+                boolean connect=selection.isConnectable();
+                boolean read=selection.isReadable();
+                boolean write=selection.isWritable();
+                boolean vaild=selection.isValid();
+                System.err.println("accept: "+accept);
+                System.err.println("connect: "+connect);
+                System.err.println("read: "+read);
+                System.err.println("write: "+write);
+                System.err.println("vaild: "+vaild);
             }
             if (key.isReadable()) {
                 //read the data
